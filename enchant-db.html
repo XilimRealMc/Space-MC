@@ -23,7 +23,7 @@
     <button class="nav-toggle" aria-label="Buka menu">☰</button>
     <div class="nav-links">
       <a href="index.html">Welcome</a>
-      <a href="donasi.html">Rank</a>
+      <a href="donasi.html">Donasi</a>
       <a href="staff.html">Staff</a>
       <a href="enchant-db.html" class="active">Enchant DB</a>
     </div>
@@ -40,33 +40,131 @@
       <span class="search-glyph">&gt;</span>
       <input type="text" id="searchInput" placeholder="cari nama atau efek enchant..." autocomplete="off">
     </div>
+
+    <div class="view-toggle" role="tablist" aria-label="Pilih tampilan database">
+      <button class="view-btn active" id="viewBtnEnchant" role="tab" aria-selected="true">⛏ Enchantments</button>
+      <button class="view-btn" id="viewBtnItems" role="tab" aria-selected="false">📦 Plugin Items</button>
+    </div>
   </div>
 </header>
 
 <main>
-  <section class="db-filters">
-    <div class="wrap">
-      <div class="legend" aria-label="Legenda rarity">
-        <span class="legend-label">RARITY</span>
-        <div id="rarityChips" class="chip-row"></div>
-        <button id="resetFilters" class="reset-btn">reset</button>
+  <div id="view-enchant" class="db-view">
+    <section class="db-filters">
+      <div class="wrap">
+        <div class="legend" aria-label="Legenda rarity">
+          <span class="legend-label">RARITY</span>
+          <div id="rarityChips" class="chip-row"></div>
+          <button id="resetFilters" class="reset-btn">reset</button>
+        </div>
+
+        <div class="tag-filter" aria-label="Filter tipe item">
+          <span class="legend-label">ITEM</span>
+          <div id="tagChips" class="chip-row tag-row"></div>
+        </div>
+
+        <p id="resultCount" class="result-count"></p>
       </div>
+    </section>
 
-      <div class="tag-filter" aria-label="Filter tipe item">
-        <span class="legend-label">ITEM</span>
-        <div id="tagChips" class="chip-row tag-row"></div>
+    <section class="wrap">
+      <div id="cardGrid" class="card-grid" aria-live="polite"></div>
+      <p id="emptyState" class="empty-state" hidden>
+        ⛏ Gak nemu enchantment yang cocok. Coba kata kunci atau filter lain, bro.
+      </p>
+    </section>
+  </div>
+
+  <div id="view-items" class="db-view" hidden>
+    <section class="wrap items-intro">
+      <p class="section-lede">Item pendukung dari plugin Advanced Enchantments — dipakai buat ngatur slot, ningkatin success rate, lindungin item, sampai tracker statistik.</p>
+    </section>
+
+    <section class="wrap">
+      <div class="item-grid">
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/sEsn5Kv.png" alt="Slot Increaser" loading="lazy">
+          <h3>Slot Increaser</h3>
+          <p>Menambah jumlah slot enchant yang bisa dipasang di sebuah item. Bisa dibatasi total slot atau jumlah pemakaiannya.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.thick.at/TouchedMonteIberiaEleuth.png" alt="Enchantment Orbs" loading="lazy">
+          <h3>Enchantment Orbs</h3>
+          <p>Dipasang ke armor/weapon untuk menambah kapasitas custom enchant sesuai jumlah yang diset di orb-nya.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/caJK2EP.png" alt="White Scroll" loading="lazy">
+          <h3>White Scroll</h3>
+          <p>Melindungi item dari hancur kalau proses enchant-nya gagal.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/xCFSOxe.png" alt="Secret, Mystery & Magic Dust" loading="lazy">
+          <h3>Secret / Mystery / Magic Dust</h3>
+          <p>Menaikkan success rate book enchant dan menurunkan kemungkinan gagal — makin tinggi rate-nya, makin besar peluang enchant berhasil terpasang.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/YbQV40y.png" alt="Black Scroll" loading="lazy">
+          <h3>Black Scroll</h3>
+          <p>Mencabut satu custom enchant acak dari item dan mengubahnya jadi book, dengan rate sukses & hancur tertentu sesuai config.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/2oE05zD.png" alt="Randomization Scrolls" loading="lazy">
+          <h3>Randomization Scrolls</h3>
+          <p>Mengacak ulang success rate dan destroy rate pada book custom enchant.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/j6BeNkQ.png" alt="Item Nametags" loading="lazy">
+          <h3>Item Nametags</h3>
+          <p>Dipakai untuk mengganti nama item. Ada filter kata terlarang dan setting warna lewat config.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/lRdZMkV.png" alt="BlockTrak" loading="lazy">
+          <h3>BlockTrak</h3>
+          <p>Dipasang di tools untuk melacak jumlah block yang sudah ditambang dengan item itu.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/M48hjUm.png" alt="StatTrak" loading="lazy">
+          <h3>StatTrak</h3>
+          <p>Dipasang di weapon untuk melacak jumlah kill yang didapat dari item itu.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/cDKpw4V.png" alt="Soul Tracker" loading="lazy">
+          <h3>Soul Tracker</h3>
+          <p>Mengumpulkan soul di item sebagai bahan bakar yang nanti dipakai untuk enchant.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/zJP3yeK.png" alt="Transmog Scroll" loading="lazy">
+          <h3>Transmog Scroll</h3>
+          <p>Mengatur ulang urutan tampilan enchant pada sebuah item.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/FCX9uHj.png" alt="Holy White Scroll" loading="lazy">
+          <h3>Holy White Scroll</h3>
+          <p>Menyelamatkan item dari hilang saat karakter mati.</p>
+        </article>
+
+        <article class="card item-card">
+          <img class="item-icon" src="https://i.imgur.com/FPfzpuV.png" alt="Mob Trak" loading="lazy">
+          <h3>Mob Trak</h3>
+          <p>Melacak jumlah mob yang sudah dibunuh menggunakan item itu.</p>
+        </article>
+
       </div>
-
-      <p id="resultCount" class="result-count"></p>
-    </div>
-  </section>
-
-  <section class="wrap">
-    <div id="cardGrid" class="card-grid" aria-live="polite"></div>
-    <p id="emptyState" class="empty-state" hidden>
-      ⛏ Gak nemu enchantment yang cocok. Coba kata kunci atau filter lain, bro.
-    </p>
-  </section>
+      <p class="items-footnote">Sumber: dokumentasi resmi plugin Advanced Enchantments.</p>
+    </section>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -90,5 +188,6 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/enchant-data.js"></script>
 <script src="assets/js/enchant-app.js"></script>
+<script src="assets/js/view-toggle.js"></script>
 </body>
 </html>
