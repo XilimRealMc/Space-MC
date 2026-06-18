@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enchant Database — Space MC</title>
+<meta name="description" content="Database lengkap Advanced Enchantments: deskripsi, rarity, item, dan max level.">
+<link rel="icon" href="assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/enchant-db.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="Space MC logo">
+      <span>SPACE MC<span class="sub">Java &amp; Bedrock</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Buka menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Welcome</a>
+      <a href="donasi.html">Donasi</a>
+      <a href="staff.html">Staff</a>
+      <a href="enchant-db.html" class="active">Enchant DB</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero db-hero">
+  <div class="wrap">
+    <span class="eyebrow">// advanced enchantments reference</span>
+    <h1 class="section-title">Enchant Database</h1>
+    <p class="section-lede"><span id="totalCount">178</span> enchantment custom — cari, filter rarity, atau filter tipe item buat nemu yang kamu butuh.</p>
+
+    <div class="search-block">
+      <span class="search-glyph">&gt;</span>
+      <input type="text" id="searchInput" placeholder="cari nama atau efek enchant..." autocomplete="off">
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="db-filters">
+    <div class="wrap">
+      <div class="legend" aria-label="Legenda rarity">
+        <span class="legend-label">RARITY</span>
+        <div id="rarityChips" class="chip-row"></div>
+        <button id="resetFilters" class="reset-btn">reset</button>
+      </div>
+
+      <div class="tag-filter" aria-label="Filter tipe item">
+        <span class="legend-label">ITEM</span>
+        <div id="tagChips" class="chip-row tag-row"></div>
+      </div>
+
+      <p id="resultCount" class="result-count"></p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div id="cardGrid" class="card-grid" aria-live="polite"></div>
+    <p id="emptyState" class="empty-state" hidden>
+      ⛏ Gak nemu enchantment yang cocok. Coba kata kunci atau filter lain, bro.
+    </p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/img/logo.png" alt="Space MC logo">
+        <span>SPACE MC</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Discord</a>
+        <a href="https://chat.whatsapp.com/CecKMMdvOZg2Ee9H4FGr5N" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://minecraft-mp.com/server-s358769" target="_blank" rel="noopener">Vote</a>
+        <a href="https://github.com/xilimrealmc" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 Space MC. Data dari plugin Advanced Enchantments. Bukan situs resmi Mojang/Minecraft.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/enchant-data.js"></script>
+<script src="assets/js/enchant-app.js"></script>
+</body>
+</html>

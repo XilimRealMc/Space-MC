@@ -1,0 +1,190 @@
+.db-hero{padding:56px 0 8px;}
+
+.search-block{
+  position:relative;
+  margin-top:26px;
+  max-width:480px;
+}
+.search-glyph{
+  position:absolute;
+  left:16px;top:50%;
+  transform:translateY(-50%);
+  color:var(--cyan);
+  font-family:var(--font-mono);
+  font-size:13px;
+  pointer-events:none;
+}
+#searchInput{
+  width:100%;
+  background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:8px;
+  color:var(--ink);
+  font-family:var(--font-mono);
+  font-size:14px;
+  padding:13px 14px 13px 36px;
+  outline:none;
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+#searchInput::placeholder{color:var(--ink-mute);}
+#searchInput:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(69,219,239,.15);}
+
+/* ---------- filters ---------- */
+.db-filters{padding:26px 0 6px;}
+.legend, .tag-filter{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+.legend-label{
+  font-family:var(--font-mono);
+  font-size:10.5px;
+  letter-spacing:1.5px;
+  color:var(--ink-mute);
+  flex:0 0 auto;
+}
+.chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  flex:1 1 auto;
+}
+.chip{
+  font-family:var(--font-mono);
+  font-size:12px;
+  font-weight:700;
+  padding:6px 12px;
+  border-radius:6px;
+  border:1px solid var(--panel-border);
+  background:var(--panel);
+  color:var(--ink-dim);
+  cursor:pointer;
+  user-select:none;
+  transition:transform .1s ease, border-color .15s ease, color .15s ease, background .15s ease;
+}
+.chip:hover{transform:translateY(-1px);border-color:var(--cyan-deep);}
+.chip.active{color:#0a0e1a;border-color:transparent;}
+.tag-row .chip{font-size:11px;padding:5px 10px;text-transform:uppercase;letter-spacing:.4px;}
+.tag-row .chip.active{background:var(--cyan);color:#0a0e1a;}
+
+.reset-btn{
+  font-family:var(--font-mono);
+  font-size:10.5px;
+  background:transparent;
+  border:1px solid var(--panel-border);
+  border-radius:6px;
+  color:var(--ink-mute);
+  padding:8px 12px;
+  cursor:pointer;
+  transition:border-color .15s ease, color .15s ease;
+}
+.reset-btn:hover{border-color:var(--danger);color:var(--danger);}
+
+.result-count{
+  font-size:12px;
+  color:var(--ink-mute);
+  margin-top:8px;
+}
+
+/* ---------- card grid ---------- */
+.card-grid{
+  padding:18px 0 70px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(290px, 1fr));
+  gap:16px;
+}
+
+.card-grid .card{
+  position:relative;
+  border-left:4px solid var(--card-color, var(--panel-border));
+  overflow:hidden;
+  transition:border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+}
+.card-grid .card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 0 1px var(--card-color, transparent), 0 14px 28px -16px var(--card-color, transparent);
+}
+
+.card-no{
+  position:absolute;
+  top:8px;right:12px;
+  font-family:var(--font-mono);
+  font-size:10px;
+  color:var(--ink-mute);
+  opacity:.7;
+}
+.card-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:10px;
+  padding-right:34px;
+}
+.card-name{
+  font-size:15px;
+  font-weight:700;
+  color:var(--ink);
+  line-height:1.3;
+}
+.rarity-badge{
+  flex:0 0 auto;
+  font-family:var(--font-mono);
+  font-size:9.5px;
+  font-weight:700;
+  padding:4px 8px;
+  border-radius:5px;
+  border:1px solid var(--card-color);
+  color:var(--card-color);
+  white-space:nowrap;
+}
+
+.card-desc{
+  font-size:13px;
+  line-height:1.55;
+  color:var(--ink-dim);
+  margin:0 0 12px;
+}
+
+.card-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:10px;
+}
+.item-pill{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  padding:3px 8px;
+  border-radius:4px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--panel-border);
+  color:var(--ink-dim);
+}
+
+.card-foot{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:1px dashed var(--panel-border);
+  padding-top:10px;
+  font-size:11px;
+  color:var(--ink-mute);
+}
+.level-tag{
+  font-family:var(--font-mono);
+  font-size:10.5px;
+  color:var(--cyan);
+}
+.level-tag .orb{color:var(--cyan);margin-right:4px;}
+
+/* ---------- empty state ---------- */
+.empty-state{
+  padding:60px 20px 100px;
+  text-align:center;
+  color:var(--ink-mute);
+  font-size:14px;
+}

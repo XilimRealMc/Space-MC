@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space MC — Survival Java &amp; Bedrock Crossplay</title>
+<meta name="description" content="Space MC: server Minecraft survival crossplay Java & Bedrock dengan custom enchantment, economy, dan crates.">
+<link rel="icon" href="assets/img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo.png" alt="Space MC logo">
+      <span>SPACE MC<span class="sub">Java &amp; Bedrock</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Buka menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="active">Welcome</a>
+      <a href="donasi.html">Donasi</a>
+      <a href="staff.html">Staff</a>
+      <a href="enchant-db.html">Enchant DB</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="orbit hero-orbit" aria-hidden="true">
+    <svg viewBox="0 0 600 600">
+      <ellipse class="ring" cx="300" cy="300" rx="280" ry="110" transform="rotate(-18 300 300)"/>
+      <g class="travel" style="animation-duration:22s;">
+        <circle class="planet" cx="580" cy="300" r="7" transform="rotate(-18 300 300)"/>
+      </g>
+      <ellipse class="ring" cx="300" cy="300" rx="190" ry="190" opacity="0.3"/>
+    </svg>
+  </div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">// Java &amp; Bedrock crossplay survival</span>
+    <h1 class="hero-title">SPACE MC</h1>
+    <p class="hero-lede">Bangun, jelajah, dan kembangkan ekonomimu di server survival yang nyambung lintas platform — main dari PC, HP, atau console, semua satu dunia yang sama.</p>
+
+    <div class="ip-card">
+      <div class="ip-row">
+        <span class="ip-label">connect</span>
+        <code id="ipValue">play.spacemc.my.id:22118</code>
+        <button class="btn btn-primary btn-sm" onclick="copyIP(this,'play.spacemc.my.id:22118')">Copy IP</button>
+      </div>
+      <p class="ip-note">Java &amp; Bedrock (Geyser) memakai address yang sama.</p>
+    </div>
+
+    <div class="hero-cta">
+      <span class="status-pill"><span class="dot"></span> Server online</span>
+      <a class="btn btn-ghost btn-sm" href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Join Discord</a>
+      <a class="btn btn-ghost btn-sm" href="https://minecraft-mp.com/server-s358769" target="_blank" rel="noopener">Vote Server</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section rules-section">
+    <div class="wrap">
+      <span class="eyebrow">Mission briefing</span>
+      <h2 class="section-title">Peraturan singkat</h2>
+      <p class="section-lede">Ringkas, biar dunia ini tetap nyaman buat semua kru. Versi lengkap ada di Discord.</p>
+
+      <div class="rule-grid">
+        <article class="card rule-card">
+          <h3>Hormati sesama pemain</h3>
+          <p>Gak ada toxic berlebihan, harassment, atau provokasi yang bikin orang lain gak nyaman.</p>
+        </article>
+        <article class="card rule-card">
+          <h3>Dilarang cheat &amp; X-Ray</h3>
+          <p>Hack client, X-Ray, autoclicker, atau exploit bug langsung kena ban permanen tanpa warning.</p>
+        </article>
+        <article class="card rule-card">
+          <h3>Dilarang griefing &amp; scam</h3>
+          <p>Lindungi properti pakai claim land. Transaksi jujur — penipuan trade gak ditoleransi.</p>
+        </article>
+        <article class="card rule-card">
+          <h3>Jaga performa server</h3>
+          <p>Hindari lag machine atau farm berlebihan yang bikin TPS drop dan ganggu pemain lain.</p>
+        </article>
+      </div>
+      <a class="btn btn-ghost btn-sm" href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Baca rules lengkap di Discord →</a>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <section class="section features-section">
+    <div class="wrap">
+      <span class="eyebrow">Onboard systems</span>
+      <h2 class="section-title">Yang bisa kamu lakukan di sini</h2>
+
+      <div class="feature-grid">
+        <article class="card feature-card">
+          <div class="feature-icon">⛏</div>
+          <h3>Custom Enchantments</h3>
+          <p>178 enchantment unik dengan 6 tingkat rarity, cari dan bandingkan lewat Enchant Database.</p>
+          <a class="feature-link" href="enchant-db.html">Buka database →</a>
+        </article>
+        <article class="card feature-card">
+          <div class="feature-icon">🪐</div>
+          <h3>Crossplay Java &amp; Bedrock</h3>
+          <p>Satu dunia, semua platform. Main bareng teman dari PC maupun mobile tanpa batasan.</p>
+        </article>
+        <article class="card feature-card">
+          <div class="feature-icon">💠</div>
+          <h3>Economy &amp; Shop</h3>
+          <p>Jual-beli item lewat shop GUI, kumpulkan saldo, dan kembangkan asetmu di dalam game.</p>
+        </article>
+        <article class="card feature-card">
+          <div class="feature-icon">🎁</div>
+          <h3>Crates &amp; Kits</h3>
+          <p>Buka crate buat hadiah random, klaim kit harian, dan naikkan skill lewat sistem leveling.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="divider"></div></div>
+
+  <section class="section cta-section">
+    <div class="wrap cta-inner">
+      <div>
+        <span class="eyebrow">Mission control</span>
+        <h2 class="section-title">Gabung komunitasnya</h2>
+        <p class="section-lede">Update server, laporan bug, dan ngobrol bareng kru lain — semua di Discord.</p>
+      </div>
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Join Discord</a>
+        <a class="btn btn-ghost" href="https://chat.whatsapp.com/CecKMMdvOZg2Ee9H4FGr5N" target="_blank" rel="noopener">Grup WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/img/logo.png" alt="Space MC logo">
+        <span>SPACE MC</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Discord</a>
+        <a href="https://chat.whatsapp.com/CecKMMdvOZg2Ee9H4FGr5N" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://minecraft-mp.com/server-s358769" target="_blank" rel="noopener">Vote</a>
+        <a href="https://github.com/xilimrealmc" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 Space MC. Bukan situs resmi Mojang/Minecraft.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
