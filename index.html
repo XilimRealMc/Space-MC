@@ -73,6 +73,20 @@
     font-family:'Space Mono', monospace; font-size:11px; letter-spacing:1px;
     color:#c7cede; margin-top:8px;
   }
+
+  #dlLaunchBtn{
+    margin-top:26px;
+    font-family:'Orbitron', sans-serif; font-weight:700;
+    font-size:14px; letter-spacing:2px; text-transform:uppercase;
+    color:#050914; background:linear-gradient(90deg,#78d6ff,#1a7f9e);
+    border:none; border-radius:6px; padding:12px 34px;
+    cursor:pointer; opacity:0; transform:translateY(8px);
+    transition:opacity .5s ease, transform .5s ease, box-shadow .2s ease;
+    box-shadow:0 0 18px rgba(120,214,255,0.5);
+  }
+  #dlLaunchBtn.show{opacity:1; transform:translateY(0);}
+  #dlLaunchBtn:hover{box-shadow:0 0 26px rgba(120,214,255,0.85);}
+  #dlLaunchBtn:active{transform:translateY(1px) scale(.98);}
 </style>
 </head>
 <body>
@@ -87,6 +101,8 @@
   <div class="hud-text" id="dlHud">Menghubungkan ke jaringan Bumi...</div>
   <div class="progress-wrap"><div class="progress-bar" id="dlBar"></div></div>
   <div class="pct" id="dlPct">0%</div>
+  <button id="dlLaunchBtn" type="button">🚀 Luncurkan</button>
+  <audio id="dlLaunchAudio" src="assets/audio/launch-voice.mp3" preload="auto"></audio>
 </div>
 
 <nav class="site-nav">
@@ -258,6 +274,9 @@
   var hud = document.getElementById('dlHud');
   var bar = document.getElementById('dlBar');
   var pct = document.getElementById('dlPct');
+  var launchBtn = document.getElementById('dlLaunchBtn');
+  var launchAudio = document.getElementById('dlLaunchAudio');
+  var loader = document.getElementById('descentLoader');
   var totalDuration = 6000; // total loading time in ms — ubah di sini kalau mau lebih cepat/lambat
   var stepDuration = totalDuration / lines.length;
   var i = 0;
@@ -272,11 +291,34 @@
       setTimeout(nextLine, stepDuration);
     } else {
       setTimeout(function(){
-        document.getElementById('descentLoader').classList.add('hidden');
-      }, 500);
+        launchBtn.classList.add('show');
+      }, 400);
     }
   }
   nextLine();
+
+  var launched = false;
+  launchBtn.addEventListener('click', function(){
+    if(launched) return;
+    launched = true;
+    launchBtn.disabled = true;
+
+    var hideLoader = function(){
+      loader.classList.add('hidden');
+    };
+
+    if(launchAudio){
+      launchAudio.currentTime = 0;
+      var playPromise = launchAudio.play();
+      // Tunggu audio selesai baru masuk ke web. Kalau gagal diputar (mis. dibatasi browser), tetap lanjut.
+      launchAudio.addEventListener('ended', hideLoader, { once:true });
+      if(playPromise && typeof playPromise.catch === 'function'){
+        playPromise.catch(hideLoader);
+      }
+    } else {
+      hideLoader();
+    }
+  });
 })();
 </script>
 
