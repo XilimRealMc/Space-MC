@@ -11,154 +11,274 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/home.css">
+
+<!-- ===== DESCENT LOADER: styles ===== -->
+<style>
+  #descentLoader{
+    position:fixed; inset:0; z-index:9999;
+    background:radial-gradient(ellipse at center, #0d1730 0%, #050914 78%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition:opacity .8s ease, visibility .8s ease;
+  }
+  #descentLoader.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+  #descentLoader .stars{position:absolute; inset:0; overflow:hidden;}
+  #descentLoader .star{
+    position:absolute; background:#fff; border-radius:50%;
+    animation:dl-twinkle 3s ease-in-out infinite;
+  }
+  @keyframes dl-twinkle{0%,100%{opacity:.15;} 50%{opacity:1;}}
+
+  #descentLoader .radar{
+    position:relative; width:170px; height:170px; border-radius:50%;
+    border:1px solid rgba(120,214,255,0.25);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:26px;
+  }
+  #descentLoader .radar::before, #descentLoader .radar::after{
+    content:''; position:absolute; border-radius:50%;
+    border:1px solid rgba(120,214,255,0.15);
+  }
+  #descentLoader .radar::before{width:114px; height:114px;}
+  #descentLoader .radar::after{width:58px; height:58px;}
+  #descentLoader .radar-sweep{
+    position:absolute; inset:0; border-radius:50%;
+    background:conic-gradient(from 0deg, rgba(120,214,255,0.55), transparent 35%);
+    animation:dl-spin 2.4s linear infinite;
+  }
+  #descentLoader .radar-dot{
+    position:absolute; width:6px; height:6px; border-radius:50%;
+    top:36%; left:64%;
+    background:#ffb454; box-shadow:0 0 8px #ffb454;
+    animation:dl-blip 2.4s ease-in-out infinite;
+  }
+  @keyframes dl-spin{to{transform:rotate(360deg);}}
+  @keyframes dl-blip{0%,100%{opacity:0;} 45%,55%{opacity:1;}}
+
+  #descentLoader .hud-text{
+    font-family:'Space Mono', monospace;
+    font-size:12px; letter-spacing:2px; text-transform:uppercase;
+    color:#78d6ff; min-height:18px; margin-bottom:16px; text-align:center; padding:0 20px;
+  }
+  #descentLoader .progress-wrap{
+    width:280px; max-width:70vw;
+    border:1px solid rgba(120,214,255,0.35); padding:3px; border-radius:3px;
+  }
+  #descentLoader .progress-bar{
+    height:6px; width:0%; border-radius:2px;
+    background:linear-gradient(90deg, #1a7f9e, #78d6ff);
+    box-shadow:0 0 10px rgba(120,214,255,0.6);
+    transition:width .35s ease;
+  }
+  #descentLoader .pct{
+    font-family:'Space Mono', monospace; font-size:11px; letter-spacing:1px;
+    color:#c7cede; margin-top:8px;
+  }
+</style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="nav-inner">
-    <a href="index.html" class="brand">
-      <img src="assets/img/logo.png" alt="Space MC logo">
-      <span>SPACE MC<span class="sub">Java &amp; Bedrock</span></span>
-    </a>
-    <button class="nav-toggle" aria-label="Buka menu">☰</button>
-    <div class="nav-links">
-      <a href="index.html" class="active">Welcome</a>
-      <a href="donasi.html">Rank</a>
-      <a href="staff.html">Staff</a>
-      <a href="enchant-db.html">Enchant DB</a>
-    </div>
+<!-- ===== DESCENT LOADER: markup ===== -->
+<div id="descentLoader">
+  <div class="stars" id="dlStars"></div>
+  <div class="radar">
+    <div class="radar-sweep"></div>
+    <div class="radar-dot"></div>
   </div>
+  <div class="hud-text" id="dlHud">Menghubungkan ke jaringan Bumi...</div>
+  <div class="progress-wrap"><div class="progress-bar" id="dlBar"></div></div>
+  <div class="pct" id="dlPct">0%</div>
+</div>
+
+<nav class="site-nav">
+<div class="nav-inner">
+<a href="index.html" class="brand">
+<img src="assets/img/logo.png" alt="Space MC logo">
+<span>SPACE MC<span class="sub">Java &amp; Bedrock</span></span>
+</a>
+<button class="nav-toggle" aria-label="Buka menu">☰</button>
+<div class="nav-links">
+<a href="index.html" class="active">Welcome</a>
+<a href="donasi.html">Rank</a>
+<a href="staff.html">Staff</a>
+<a href="enchant-db.html">Enchant DB</a>
+</div>
+</div>
 </nav>
 
 <header class="hero">
-  <div class="orbit hero-orbit" aria-hidden="true">
-    <svg viewBox="0 0 600 600">
-      <ellipse class="ring" cx="300" cy="300" rx="280" ry="110" transform="rotate(-18 300 300)"/>
-      <g class="travel" style="animation-duration:22s;">
-        <circle class="planet" cx="580" cy="300" r="7" transform="rotate(-18 300 300)"/>
-      </g>
-      <ellipse class="ring" cx="300" cy="300" rx="190" ry="190" opacity="0.3"/>
-    </svg>
-  </div>
-  <div class="wrap hero-inner">
-    <span class="eyebrow">// Java &amp; Bedrock crossplay survival</span>
-    <h1 class="hero-title">SPACE MC</h1>
-    <p class="hero-lede">Bangun, jelajah, dan kembangkan ekonomimu di server survival yang nyambung lintas platform — main dari PC, HP, atau console, semua satu dunia yang sama.</p>
-
-    <div class="ip-card">
-      <div class="ip-row">
-        <span class="ip-label">connect</span>
-        <code id="ipValue">play.spacemc.my.id:22118</code>
-        <button class="btn btn-primary btn-sm" onclick="copyIP(this,'play.spacemc.my.id:22118')">Copy IP</button>
-      </div>
-      <p class="ip-note">Java &amp; Bedrock (Geyser) memakai address yang sama.</p>
-    </div>
-
-    <div class="hero-cta">
-      <span class="status-pill"><span class="dot"></span> Server online</span>
-      <a class="btn btn-ghost btn-sm" href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Join Discord</a>
-      <a class="btn btn-ghost btn-sm" href="https://minecraft-mp.com/server-s358769" target="_blank" rel="noopener">Vote Server</a>
-    </div>
-  </div>
+<div class="orbit hero-orbit" aria-hidden="true">
+<svg viewBox="0 0 600 600">
+<ellipse class="ring" cx="300" cy="300" rx="280" ry="110" transform="rotate(-18 300 300)"/>
+<g class="travel" style="animation-duration:22s;">
+<circle class="planet" cx="580" cy="300" r="7" transform="rotate(-18 300 300)"/>
+</g>
+<ellipse class="ring" cx="300" cy="300" rx="190" ry="190" opacity="0.3"/>
+</svg>
+</div>
+<div class="wrap hero-inner">
+<span class="eyebrow">// Transmisi masuk — Command Deck</span>
+<h1 class="hero-title">SPACE MC</h1>
+<p class="hero-lede"><strong>Admiral, kru sudah standby di orbit.</strong> Satu perintah, dan mereka turun ke Bumi — dari PC, HP, sampai console, semua mendarat di dunia yang sama untuk membangun markas dan menguasai ekonominya.</p>
+<div class="ip-card">
+<div class="ip-row">
+<span class="ip-label">connect</span>
+<code id="ipValue">play.spacemc.my.id:22118</code>
+<button class="btn btn-primary btn-sm" onclick="copyIP(this,'play.spacemc.my.id:22118')">Copy IP</button>
+</div>
+<p class="ip-note">Java &amp; Bedrock (Geyser) memakai address yang sama.</p>
+</div>
+<div class="hero-cta">
+<span class="status-pill"><span class="dot"></span> Server online</span>
+<a class="btn btn-ghost btn-sm" href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Join Discord</a>
+<a class="btn btn-ghost btn-sm" href="https://minecraft-mp.com/server-s358769" target="_blank" rel="noopener">Vote Server</a>
+</div>
+</div>
 </header>
 
 <main>
-  <section class="section rules-section">
-    <div class="wrap">
-      <span class="eyebrow">Mission briefing</span>
-      <h2 class="section-title">Peraturan singkat</h2>
-      <p class="section-lede">Ringkas, biar dunia ini tetap nyaman buat semua kru. Versi lengkap ada di Discord.</p>
+<section class="section rules-section">
+<div class="wrap">
+<span class="eyebrow">Mission briefing</span>
+<h2 class="section-title">Peraturan singkat</h2>
+<p class="section-lede">Ringkas, biar dunia ini tetap nyaman buat semua kru. Versi lengkap ada di Discord.</p>
+<div class="rule-grid">
+<article class="card rule-card">
+<h3>Hormati sesama pemain</h3>
+<p>Gak ada toxic berlebihan, harassment, atau provokasi yang bikin orang lain gak nyaman.</p>
+</article>
+<article class="card rule-card">
+<h3>Dilarang cheat &amp; X-Ray</h3>
+<p>Hack client, X-Ray, autoclicker, atau exploit bug langsung kena ban permanen tanpa warning.</p>
+</article>
+<article class="card rule-card">
+<h3>Dilarang griefing &amp; scam</h3>
+<p>Lindungi properti pakai claim land. Transaksi jujur — penipuan trade gak ditoleransi.</p>
+</article>
+<article class="card rule-card">
+<h3>Jaga performa server</h3>
+<p>Hindari lag machine atau farm berlebihan yang bikin TPS drop dan ganggu pemain lain.</p>
+</article>
+</div>
+<a class="btn btn-ghost btn-sm" href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Baca rules lengkap di Discord →</a>
+</div>
+</section>
 
-      <div class="rule-grid">
-        <article class="card rule-card">
-          <h3>Hormati sesama pemain</h3>
-          <p>Gak ada toxic berlebihan, harassment, atau provokasi yang bikin orang lain gak nyaman.</p>
-        </article>
-        <article class="card rule-card">
-          <h3>Dilarang cheat &amp; X-Ray</h3>
-          <p>Hack client, X-Ray, autoclicker, atau exploit bug langsung kena ban permanen tanpa warning.</p>
-        </article>
-        <article class="card rule-card">
-          <h3>Dilarang griefing &amp; scam</h3>
-          <p>Lindungi properti pakai claim land. Transaksi jujur — penipuan trade gak ditoleransi.</p>
-        </article>
-        <article class="card rule-card">
-          <h3>Jaga performa server</h3>
-          <p>Hindari lag machine atau farm berlebihan yang bikin TPS drop dan ganggu pemain lain.</p>
-        </article>
-      </div>
-      <a class="btn btn-ghost btn-sm" href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Baca rules lengkap di Discord →</a>
-    </div>
-  </section>
+<div class="wrap"><div class="divider"></div></div>
 
-  <div class="wrap"><div class="divider"></div></div>
+<section class="section features-section">
+<div class="wrap">
+<span class="eyebrow">Onboard systems</span>
+<h2 class="section-title">Yang bisa kamu lakukan di sini</h2>
+<div class="feature-grid">
+<article class="card feature-card">
+<div class="feature-icon">⛏</div>
+<h3>Custom Enchantments</h3>
+<p>178 enchantment unik dengan 6 tingkat rarity, cari dan bandingkan lewat Enchant Database.</p>
+<a class="feature-link" href="enchant-db.html">Buka database →</a>
+</article>
+<article class="card feature-card">
+<div class="feature-icon">🪐</div>
+<h3>Crossplay Java &amp; Bedrock</h3>
+<p>Satu dunia, semua platform. Main bareng teman dari PC maupun mobile tanpa batasan.</p>
+</article>
+<article class="card feature-card">
+<div class="feature-icon">💠</div>
+<h3>Economy &amp; Shop</h3>
+<p>Jual-beli item lewat shop GUI, kumpulkan saldo, dan kembangkan asetmu di dalam game.</p>
+</article>
+<article class="card feature-card">
+<div class="feature-icon">🎁</div>
+<h3>Crates &amp; Kits</h3>
+<p>Buka crate buat hadiah random, klaim kit harian, dan naikkan skill lewat sistem leveling.</p>
+</article>
+</div>
+</div>
+</section>
 
-  <section class="section features-section">
-    <div class="wrap">
-      <span class="eyebrow">Onboard systems</span>
-      <h2 class="section-title">Yang bisa kamu lakukan di sini</h2>
+<div class="wrap"><div class="divider"></div></div>
 
-      <div class="feature-grid">
-        <article class="card feature-card">
-          <div class="feature-icon">⛏</div>
-          <h3>Custom Enchantments</h3>
-          <p>178 enchantment unik dengan 6 tingkat rarity, cari dan bandingkan lewat Enchant Database.</p>
-          <a class="feature-link" href="enchant-db.html">Buka database →</a>
-        </article>
-        <article class="card feature-card">
-          <div class="feature-icon">🪐</div>
-          <h3>Crossplay Java &amp; Bedrock</h3>
-          <p>Satu dunia, semua platform. Main bareng teman dari PC maupun mobile tanpa batasan.</p>
-        </article>
-        <article class="card feature-card">
-          <div class="feature-icon">💠</div>
-          <h3>Economy &amp; Shop</h3>
-          <p>Jual-beli item lewat shop GUI, kumpulkan saldo, dan kembangkan asetmu di dalam game.</p>
-        </article>
-        <article class="card feature-card">
-          <div class="feature-icon">🎁</div>
-          <h3>Crates &amp; Kits</h3>
-          <p>Buka crate buat hadiah random, klaim kit harian, dan naikkan skill lewat sistem leveling.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <div class="wrap"><div class="divider"></div></div>
-
-  <section class="section cta-section">
-    <div class="wrap cta-inner">
-      <div>
-        <span class="eyebrow">Mission control</span>
-        <h2 class="section-title">Gabung komunitasnya</h2>
-        <p class="section-lede">Update server, laporan bug, dan ngobrol bareng kru lain — semua di Discord.</p>
-      </div>
-      <div class="cta-buttons">
-        <a class="btn btn-primary" href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Join Discord</a>
-        <a class="btn btn-ghost" href="https://chat.whatsapp.com/CecKMMdvOZg2Ee9H4FGr5N" target="_blank" rel="noopener">Grup WhatsApp</a>
-      </div>
-    </div>
-  </section>
+<section class="section cta-section">
+<div class="wrap cta-inner">
+<div>
+<span class="eyebrow">Mission control</span>
+<h2 class="section-title">Gabung komunitasnya</h2>
+<p class="section-lede">Update server, laporan bug, dan ngobrol bareng kru lain — semua di Discord.</p>
+</div>
+<div class="cta-buttons">
+<a class="btn btn-primary" href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Join Discord</a>
+<a class="btn btn-ghost" href="https://chat.whatsapp.com/CecKMMdvOZg2Ee9H4FGr5N" target="_blank" rel="noopener">Grup WhatsApp</a>
+</div>
+</div>
+</section>
 </main>
 
 <footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="assets/img/logo.png" alt="Space MC logo">
-        <span>SPACE MC</span>
-      </div>
-      <div class="footer-links">
-        <a href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Discord</a>
-        <a href="https://chat.whatsapp.com/CecKMMdvOZg2Ee9H4FGr5N" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://minecraft-mp.com/server-s358769" target="_blank" rel="noopener">Vote</a>
-        <a href="https://github.com/xilimrealmc" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </div>
-    <p class="footer-bottom">© 2026 Space MC. Bukan situs resmi Mojang/Minecraft.</p>
-  </div>
+<div class="wrap">
+<div class="footer-inner">
+<div class="footer-brand">
+<img src="assets/img/logo.png" alt="Space MC logo">
+<span>SPACE MC</span>
+</div>
+<div class="footer-links">
+<a href="https://discord.gg/23epMqcHqx" target="_blank" rel="noopener">Discord</a>
+<a href="https://chat.whatsapp.com/CecKMMdvOZg2Ee9H4FGr5N" target="_blank" rel="noopener">WhatsApp</a>
+<a href="https://minecraft-mp.com/server-s358769" target="_blank" rel="noopener">Vote</a>
+<a href="https://github.com/xilimrealmc" target="_blank" rel="noopener">GitHub</a>
+</div>
+</div>
+<p class="footer-bottom">© 2026 Space MC. Bukan situs resmi Mojang/Minecraft.</p>
+</div>
 </footer>
 
 <script src="assets/js/main.js"></script>
+
+<!-- ===== DESCENT LOADER: script ===== -->
+<script>
+(function(){
+  var field = document.getElementById('dlStars');
+  for(var i=0;i<50;i++){
+    var s = document.createElement('div');
+    s.className='star';
+    var size = Math.random()*2+1;
+    s.style.width = s.style.height = size+'px';
+    s.style.top = Math.random()*100+'%';
+    s.style.left = Math.random()*100+'%';
+    s.style.animationDelay = Math.random()*3+'s';
+    field.appendChild(s);
+  }
+
+  var lines = [
+    'Menghubungkan ke jaringan Bumi...',
+    'Menyinkronkan Java & Bedrock...',
+    'Memuat sektor ekonomi & enchantment...',
+    'Mengunci koordinat pendaratan...',
+    'Sekuens pendaratan dimulai...',
+    'Selamat datang, kru.'
+  ];
+  var hud = document.getElementById('dlHud');
+  var bar = document.getElementById('dlBar');
+  var pct = document.getElementById('dlPct');
+  var totalDuration = 6000; // total loading time in ms — ubah di sini kalau mau lebih cepat/lambat
+  var stepDuration = totalDuration / lines.length;
+  var i = 0;
+
+  function nextLine(){
+    hud.textContent = lines[i];
+    var progress = Math.round(((i+1)/lines.length)*100);
+    bar.style.width = progress+'%';
+    pct.textContent = progress+'%';
+    i++;
+    if(i < lines.length){
+      setTimeout(nextLine, stepDuration);
+    } else {
+      setTimeout(function(){
+        document.getElementById('descentLoader').classList.add('hidden');
+      }, 500);
+    }
+  }
+  nextLine();
+})();
+</script>
+
 </body>
 </html>
